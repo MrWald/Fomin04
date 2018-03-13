@@ -4,13 +4,16 @@ using System.Text.RegularExpressions;
 
 namespace Fomin04
 {
+    [Serializable]
     internal class Person
     {
+        internal const string filename = "Users.dat";
+
         private DateTime _birthDate;
         private string _firstName, _lastName;
         private string _email;
 
-        internal DateTime BirthDate
+        public DateTime BirthDate
         {
             get { return _birthDate; }
             private set
@@ -24,7 +27,7 @@ namespace Fomin04
                 _birthDate = value;
             }
         }
-        internal string FirstName
+        public string FirstName
         {
             get { return _firstName; }
             private set
@@ -36,7 +39,7 @@ namespace Fomin04
             }
         }
 
-        internal string LastName
+        public string LastName
         {
             get { return _lastName; }
             private set
@@ -48,7 +51,7 @@ namespace Fomin04
             }
         }
 
-        internal string Email
+        public string Email
         {
             get { return _email; }
             private set
@@ -60,11 +63,11 @@ namespace Fomin04
             }
         }
 
-        internal bool IsAdult { get; }
-        internal bool IsBirthday { get; }
-        internal int Age { get; }
-        internal string ChineseSign { get; }
-        internal string SunSign { get; }
+        public bool IsAdult { get; }
+        public bool IsBirthday { get; }
+        public int Age { get; }
+        public string ChineseSign { get; }
+        public string SunSign { get; }
 
         private Person(string firstName, string lastName, string email)
         {

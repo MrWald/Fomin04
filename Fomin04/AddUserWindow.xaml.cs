@@ -6,13 +6,13 @@ namespace Fomin04
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    internal partial class MainWindow : Window
+    internal partial class AddUserWindow : Window
     {
         private ImageAwesome _loader;
         private PersonInputView _personInputView;
         private CalculationResultView _calculationResultView;
 
-        public MainWindow()
+        public AddUserWindow()
         {
             InitializeComponent();
             ShowInputView();
