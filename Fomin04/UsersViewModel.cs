@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Fomin04
 {
-    class UsersViewModel
+    class UsersViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Person> _users;
 
@@ -22,12 +21,17 @@ namespace Fomin04
         internal UsersViewModel()
         {
             _users = new ObservableCollection<Person>(AgeCalcAdapter.Users);
+            
         }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

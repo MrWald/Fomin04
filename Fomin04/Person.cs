@@ -1,17 +1,34 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 namespace Fomin04
 {
     [Serializable]
-    internal class Person
+    internal class Person : INotifyPropertyChanged
     {
         internal const string filename = "Users.dat";
 
         private DateTime _birthDate;
         private string _firstName, _lastName;
         private string _email;
+        private int _age;
+        private bool _isAdult;
+        private bool _isBirthday;
+        private string _chineseSign;
+        private string _sunSign;
+
+        public string BirthDateString
+        {
+            get { return _birthDate.ToShortDateString(); }
+            set
+            {
+                string[] dmy = value.Split('/');
+                BirthDate = new DateTime(Int32.Parse(dmy[2]), Int32.Parse(dmy[1]), Int32.Parse(dmy[0]));
+            }
+        }
 
         public DateTime BirthDate
         {
@@ -25,10 +42,14 @@ namespace Fomin04
                 if (y > 110)
                     throw new PastDateException(value);
                 _birthDate = value;
+                Age = CalculateAge();
+                ChineseSign = CalculateChineseSign();
+                SunSign = CalculateSunSign();
                 IsAdult = (Age = CalculateAge()) > 18;
                 IsBirthday = BirthDate.DayOfYear == DateTime.Today.DayOfYear;
                 ChineseSign = CalculateChineseSign();
                 SunSign = CalculateSunSign();
+                OnPropertyChanged();
             }
         }
         public string FirstName
@@ -36,8 +57,11 @@ namespace Fomin04
             get { return _firstName; }
             set
             {
-                if(Regex.IsMatch(value, @"^[a-zA-Z'-]+$"))
+                if (Regex.IsMatch(value, @"^[a-zA-Z'-]+$"))
+                {
                     _firstName = value;
+                    OnPropertyChanged();
+                }
                 else
                     throw new InvalidNameException($"{value} {_lastName}");
             }
@@ -49,7 +73,10 @@ namespace Fomin04
             set
             {
                 if (Regex.IsMatch(value, @"^[a-zA-Z'-]+$"))
+                {
                     _lastName = value;
+                    OnPropertyChanged();
+                }
                 else
                     throw new InvalidNameException($"{_firstName} {value}");
             }
@@ -61,17 +88,59 @@ namespace Fomin04
             set
             {
                 if (new EmailAddressAttribute().IsValid(value))
+                {
                     _email = value;
+                    OnPropertyChanged();
+                }
                 else
                     throw new InvalidEmailException(value);
             }
         }
 
-        public bool IsAdult { get; private set; }
-        public bool IsBirthday { get; private set; }
-        public int Age { get; private set; }
-        public string ChineseSign { get; private set; }
-        public string SunSign { get; private set; }
+        public bool IsAdult
+        {
+            get { return _isAdult;}
+            private set
+            {
+                _isAdult = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsBirthday
+        {
+            get { return _isBirthday;}
+            private set
+            {
+                _isBirthday = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Age
+        {
+            get { return _age;}
+            private set
+            {
+                _age = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ChineseSign
+        {
+            get { return _chineseSign;}
+            private set
+            {
+                _chineseSign = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SunSign
+        {
+            get { return _sunSign;}
+            private set
+            {
+                _sunSign = value;
+                OnPropertyChanged();
+            } }
 
         private Person(string firstName, string lastName, string email)
         {
@@ -164,6 +233,19 @@ namespace Fomin04
                     throw new ArgumentException();
             }
         }
+
+        #region Implementation
+
+        [field: NonSerializedAttribute()]
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
     }
 
     internal class FutureDateException : Exception

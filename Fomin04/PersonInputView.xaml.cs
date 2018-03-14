@@ -10,6 +10,7 @@ namespace Fomin04
         public PersonInputView()
         {
             InitializeComponent();
+
         }
     }
 }
