@@ -11,17 +11,17 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False" Grid.Row="0">
+        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Users}" AutoGenerateColumns="False" Grid.Row="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Birth Date" Binding="{Binding BirthDate}"></DataGridTextColumn>
-                <DataGridTextColumn Header="E-mail" Binding="{Binding Email}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Age" Binding="{Binding Age}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Adult" Binding="{Binding IsAdult}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Birthday" Binding="{Binding IsBirthday}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Chinese Sign" Binding="{Binding ChineseSign}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Sun Sign" Binding="{Binding SunSign}"></DataGridTextColumn>
+                <DataGridTextColumn Header="First Name" IsReadOnly="False" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" IsReadOnly="False" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birth Date" IsReadOnly="False" Binding="{Binding BirthDate}"></DataGridTextColumn>
+                <DataGridTextColumn Header="E-mail" IsReadOnly="False" Binding="{Binding Email}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Age" IsReadOnly="True" Binding="{Binding Age}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adult" IsReadOnly="True" Binding="{Binding IsAdult}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday" IsReadOnly="True" Binding="{Binding IsBirthday}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Chinese Sign" IsReadOnly="True" Binding="{Binding ChineseSign}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Sun Sign" IsReadOnly="True" Binding="{Binding SunSign}"></DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

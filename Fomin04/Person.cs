@@ -16,7 +16,7 @@ namespace Fomin04
         public DateTime BirthDate
         {
             get { return _birthDate; }
-            private set
+            set
             {
                 int d = (DateTime.Today - value).Days;
                 if (d < 0)
@@ -25,12 +25,16 @@ namespace Fomin04
                 if (y > 110)
                     throw new PastDateException(value);
                 _birthDate = value;
+                IsAdult = (Age = CalculateAge()) > 18;
+                IsBirthday = BirthDate.DayOfYear == DateTime.Today.DayOfYear;
+                ChineseSign = CalculateChineseSign();
+                SunSign = CalculateSunSign();
             }
         }
         public string FirstName
         {
             get { return _firstName; }
-            private set
+            set
             {
                 if(Regex.IsMatch(value, @"^[a-zA-Z'-]+$"))
                     _firstName = value;
@@ -42,7 +46,7 @@ namespace Fomin04
         public string LastName
         {
             get { return _lastName; }
-            private set
+            set
             {
                 if (Regex.IsMatch(value, @"^[a-zA-Z'-]+$"))
                     _lastName = value;
@@ -54,7 +58,7 @@ namespace Fomin04
         public string Email
         {
             get { return _email; }
-            private set
+            set
             {
                 if (new EmailAddressAttribute().IsValid(value))
                     _email = value;
@@ -63,11 +67,11 @@ namespace Fomin04
             }
         }
 
-        public bool IsAdult { get; }
-        public bool IsBirthday { get; }
-        public int Age { get; }
-        public string ChineseSign { get; }
-        public string SunSign { get; }
+        public bool IsAdult { get; private set; }
+        public bool IsBirthday { get; private set; }
+        public int Age { get; private set; }
+        public string ChineseSign { get; private set; }
+        public string SunSign { get; private set; }
 
         private Person(string firstName, string lastName, string email)
         {
@@ -81,10 +85,6 @@ namespace Fomin04
             BirthDate = birthDate;
             FirstName = firstName;
             LastName = lastName;
-            IsAdult = (Age = CalculateAge()) > 18;
-            IsBirthday = BirthDate.DayOfYear == DateTime.Today.DayOfYear;
-            ChineseSign = CalculateChineseSign();
-            SunSign = CalculateSunSign();
         }
         
         internal Person(string firstName, string lastName, string email, DateTime birthDate) 
