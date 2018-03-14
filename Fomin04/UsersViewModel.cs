@@ -12,7 +12,7 @@ namespace Fomin04
         public ObservableCollection<Person> Users
         {
             get => _users;
-            private set
+            set
             {
                 _users = value;
                 OnPropertyChanged();

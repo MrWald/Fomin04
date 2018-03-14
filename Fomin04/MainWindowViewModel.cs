@@ -171,8 +171,8 @@ namespace Fomin04
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                ClearInputValues();
             }
+            ClearInputValues();
             _showLoaderAction.Invoke(false);
         }
 

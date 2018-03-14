@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using FontAwesome.WPF;
 
 namespace Fomin04
 {
@@ -9,14 +10,42 @@ namespace Fomin04
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ImageAwesome _loader;
+        private PersonInputView _personInputView;
+        private UsersView _usersView;
+
         public MainWindow()
         {
             InitializeComponent();
+            ShowUsersView();
+            DataContext = new MainWindowViewModel(ShowUsersView, ShowInputView, ShowLoader);
         }
 
-        public void LoadCreationUserWindow(object sender, RoutedEventArgs e)
+        private void ShowInputView()
         {
-            new AddUserWindow().Show();
+            MainGrid.Children.Clear();
+            if (_personInputView == null)
+            {
+                _personInputView = new PersonInputView();
+            }
+            MainGrid.Children.Add(_personInputView);
+        }
+
+        private void ShowUsersView()
+        {
+            MainGrid.Children.Clear();
+            if (_usersView == null)
+            {
+                _usersView = new UsersView(ShowInputView);
+            }
+            else
+                _usersView.UpdateUsers();
+            MainGrid.Children.Add(_usersView);
+        }
+
+        private void ShowLoader(bool isShow)
+        {
+            LoaderHelper.OnRequestLoader(MainGrid, ref _loader, isShow);
         }
 
         protected override void OnClosing(CancelEventArgs e)

@@ -6,12 +6,10 @@
         xmlns:fomin04="clr-namespace:Fomin04"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <fomin04:UsersView Grid.Row="0"></fomin04:UsersView>
-        <Button Grid.Row="1" Content="Add User" Click="LoadCreationUserWindow"></Button>
+
     </Grid>
 </Window>

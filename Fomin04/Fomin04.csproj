@@ -72,27 +72,12 @@
       <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UsersViewModel.cs" />
-    <Page Include="CalculationResultView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="AddUserWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="AgeCalcAdapter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CalculationResultView.xaml.cs">
-      <DependentUpon>CalculationResultView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LoaderHelper.cs" />
-    <Compile Include="AddUserWindow.xaml.cs">
-      <DependentUpon>AddUserWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,7 +92,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUserWindowViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonInputView.xaml.cs">
       <DependentUpon>PersonInputView.xaml</DependentUpon>

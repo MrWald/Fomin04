@@ -6,7 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600">
     <Grid>
-        <DataGrid ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False" Grid.Row="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
@@ -17,8 +22,15 @@
                 <DataGridTextColumn Header="Birthday" Binding="{Binding IsBirthday}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Chinese Sign" Binding="{Binding ChineseSign}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Sun Sign" Binding="{Binding SunSign}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteRow" Content="Delete"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-</Grid>
+        <Button Grid.Row="1" Content="Add User" Click="ShowInputView"></Button>
+    </Grid>
 </UserControl>
