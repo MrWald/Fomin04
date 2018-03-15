@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace Fomin04
 {
@@ -7,10 +8,10 @@ namespace Fomin04
     /// </summary>
     internal partial class PersonInputView : UserControl
     {
-        public PersonInputView()
+        public PersonInputView(Action userInputAction, Action usersViewAction, Action<bool> loaderAction)
         {
             InitializeComponent();
-
+            DataContext = new PersonInputViewModel(userInputAction, usersViewAction, loaderAction);
         }
     }
 }

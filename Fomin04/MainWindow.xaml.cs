@@ -17,16 +17,13 @@ namespace Fomin04
         {
             InitializeComponent();
             ShowUsersView();
-            DataContext = new MainWindowViewModel(ShowUsersView, ShowInputView, ShowLoader);
         }
 
         private void ShowInputView()
         {
             MainGrid.Children.Clear();
             if (_personInputView == null)
-            {
-                _personInputView = new PersonInputView();
-            }
+                _personInputView = new PersonInputView(ShowUsersView, ShowInputView, ShowLoader);
             MainGrid.Children.Add(_personInputView);
         }
 
@@ -34,11 +31,9 @@ namespace Fomin04
         {
             MainGrid.Children.Clear();
             if (_usersView == null)
-            {
                 _usersView = new UsersView(ShowInputView);
-            }
             else
-                _usersView.UpdateUsers();
+                ((UsersViewModel)_usersView.DataContext).UpdateUsers();
             MainGrid.Children.Add(_usersView);
         }
 

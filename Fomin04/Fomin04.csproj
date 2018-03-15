@@ -92,7 +92,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="PersonInputViewModel.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonInputView.xaml.cs">
       <DependentUpon>PersonInputView.xaml</DependentUpon>

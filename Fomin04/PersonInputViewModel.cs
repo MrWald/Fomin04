@@ -7,16 +7,12 @@ using System.Windows;
 
 namespace Fomin04
 {
-    internal class MainWindowViewModel : INotifyPropertyChanged
+    internal class PersonInputViewModel : INotifyPropertyChanged
     {
         private string _firstName = "";
         private string _lastName = "";
         private string _email = "";
         private DateTime _date = DateTime.Today;
-        private string _birthday;
-        private string _adult;
-        private string _wZodiac;
-        private string _cZodiac;
         private bool _canExecute;
 
         private RelayCommand _calculateAgeCommand;
@@ -29,7 +25,7 @@ namespace Fomin04
 
         private readonly Action<bool> _showLoaderAction;
         
-        internal MainWindowViewModel(Action closeAction, Action returnAction, Action<bool> showLoader)
+        internal PersonInputViewModel(Action closeAction, Action returnAction, Action<bool> showLoader)
         {
             _returnAction = returnAction;
             _closeAction = closeAction;
@@ -57,11 +53,6 @@ namespace Fomin04
                 CanExecute = CheckIfFilled();
                 OnPropertyChanged();
             }
-        }
-
-        public string DateString
-        {
-            get { return _date.ToShortDateString(); }
         }
 
         public string FirstName
@@ -96,46 +87,7 @@ namespace Fomin04
                 OnPropertyChanged();
             }
         }
-
-        public string Birthday
-        {
-            get { return _birthday; }
-            set
-            {
-                _birthday = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Adult
-        {
-            get { return _adult; }
-            set
-            {
-                _adult = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string WesternZodiac
-        {
-            get { return _wZodiac; }
-            private set
-            {
-                _wZodiac = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ChineseZodiac
-        {
-            get { return _cZodiac; }
-            private set
-            {
-                _cZodiac = value;
-                OnPropertyChanged();
-            }
-        }
+        
         #endregion
 
         public RelayCommand CalculateAgeCommand
@@ -151,20 +103,16 @@ namespace Fomin04
         private async void AgeCalcImpl(object o)
         {
             _showLoaderAction.Invoke(true);
-            ClearValues();
+            CanExecute = false;
             try
             {
                 await Task.Run(() =>
                 {
-                        StationManager.CurrentPerson = AgeCalcAdapter.CreateUser(_firstName, _lastName, _email, _date);
-                        Thread.Sleep(500);
+                    StationManager.CurrentPerson = AgeCalcAdapter.CreateUser(_firstName, _lastName, _email, _date);
+                    Thread.Sleep(500);
                 });
                 if (DateTime.Today.DayOfYear == _date.DayOfYear)
                     MessageBox.Show($"Happy Birthday, {FirstName}!");
-                Birthday = $"{StationManager.CurrentPerson.IsBirthday}";
-                Adult = $"{StationManager.CurrentPerson.IsAdult}";
-                WesternZodiac = StationManager.CurrentPerson.SunSign;
-                ChineseZodiac = StationManager.CurrentPerson.ChineseSign;
                 _closeAction.Invoke();
                 CanExecute = true;
             }
@@ -181,7 +129,7 @@ namespace Fomin04
             await Task.Run(() =>
             {
                 ClearInputValues();
-                ClearValues();
+                CanExecute = false;
             });
             _returnAction.Invoke();
         }
@@ -192,15 +140,6 @@ namespace Fomin04
             FirstName = "";
             LastName = "";
             Email = "";
-        }
-
-        private void ClearValues()
-        {
-            CanExecute = false;
-            Birthday = "";
-            Adult = "";
-            WesternZodiac = "";
-            ChineseZodiac = "";
         }
 
         private bool CheckIfFilled()
