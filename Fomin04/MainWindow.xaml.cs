@@ -23,7 +23,7 @@ namespace Fomin04
         {
             MainGrid.Children.Clear();
             if (_personInputView == null)
-                _personInputView = new PersonInputView(ShowUsersView, ShowInputView, ShowLoader);
+                _personInputView = new PersonInputView(ShowUsersView, ShowLoader);
             MainGrid.Children.Add(_personInputView);
         }
 

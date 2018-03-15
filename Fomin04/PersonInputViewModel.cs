@@ -17,17 +17,14 @@ namespace Fomin04
 
         private RelayCommand _calculateAgeCommand;
 
-        private RelayCommand _returnToInputCommand;
+        private RelayCommand _returnToViewCommand;
 
         private readonly Action _closeAction;
 
-        private readonly Action _returnAction;
-
         private readonly Action<bool> _showLoaderAction;
         
-        internal PersonInputViewModel(Action closeAction, Action returnAction, Action<bool> showLoader)
+        internal PersonInputViewModel(Action closeAction, Action<bool> showLoader)
         {
-            _returnAction = returnAction;
             _closeAction = closeAction;
             _showLoaderAction = showLoader;
             CanExecute = false;
@@ -95,9 +92,9 @@ namespace Fomin04
             get { return _calculateAgeCommand ?? (_calculateAgeCommand = new RelayCommand(AgeCalcImpl)); }
         }
 
-        public RelayCommand ReturnToInputCommand
+        public RelayCommand ReturnToViewCommand
         {
-            get { return _returnToInputCommand ?? (_returnToInputCommand = new RelayCommand(RetToInpImpl)); }
+            get { return _returnToViewCommand ?? (_returnToViewCommand = new RelayCommand(RetToViewImpl)); }
         }
 
         private async void AgeCalcImpl(object o)
@@ -124,14 +121,14 @@ namespace Fomin04
             _showLoaderAction.Invoke(false);
         }
 
-        private async void RetToInpImpl(object o)
+        private async void RetToViewImpl(object o)
         {
             await Task.Run(() =>
             {
                 ClearInputValues();
                 CanExecute = false;
             });
-            _returnAction.Invoke();
+            _closeAction.Invoke();
         }
 
         private void ClearInputValues()

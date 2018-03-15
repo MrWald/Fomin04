@@ -8,10 +8,10 @@ namespace Fomin04
     /// </summary>
     internal partial class PersonInputView : UserControl
     {
-        public PersonInputView(Action userInputAction, Action usersViewAction, Action<bool> loaderAction)
+        public PersonInputView(Action usersViewAction, Action<bool> loaderAction)
         {
             InitializeComponent();
-            DataContext = new PersonInputViewModel(userInputAction, usersViewAction, loaderAction);
+            DataContext = new PersonInputViewModel(usersViewAction, loaderAction);
         }
     }
 }

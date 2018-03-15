@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Users, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Row="0">
+        <DataGrid Name="UsersDataGrid" ItemsSource="{Binding Users, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Row="0" Margin="1 1 1 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" IsReadOnly="False" Binding="{Binding FirstName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Last Name" IsReadOnly="False" Binding="{Binding LastName}"></DataGridTextColumn>
@@ -31,6 +31,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="1" Content="Add User" Command="{Binding ShowInputViewCommand}"></Button>
+        <Button Grid.Row="1" Content="Add User" Command="{Binding ShowInputViewCommand}" Margin="3"></Button>
     </Grid>
 </UserControl>
