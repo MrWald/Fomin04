@@ -108,7 +108,7 @@ namespace Fomin04
                     StationManager.CurrentPerson = AgeCalcAdapter.CreateUser(_firstName, _lastName, _email, _date);
                     Thread.Sleep(500);
                 });
-                if (DateTime.Today.DayOfYear == _date.DayOfYear)
+                if (DateTime.Today.Day == _date.Day && DateTime.Today.Month == _date.Month)
                     MessageBox.Show($"Happy Birthday, {FirstName}!");
                 _closeAction.Invoke();
                 CanExecute = true;

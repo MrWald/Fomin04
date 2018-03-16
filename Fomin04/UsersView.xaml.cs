@@ -11,6 +11,8 @@ namespace Fomin04
         public UsersView(Action showInputViewAction)
         {
             InitializeComponent();
+            AgeSlider.LowerValue = AgeSlider.Minimum = 0;
+            AgeSlider.UpperValue = AgeSlider.Maximum = 110;
             DataContext = new UsersViewModel(UsersDataGrid, showInputViewAction);
         }
     }
